@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     post = Post.find(params[:post_id])
-    @comment = post.comments.build
+    @comment = post.comments.build(comment_params)
 
     respond_to do |format|
       if @comment.save
@@ -101,6 +101,6 @@ class CommentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
-    params.require(:comment).permit(:body).merge(user: current_user)
+    params.require(:comment).permit(:body)
   end
 end
